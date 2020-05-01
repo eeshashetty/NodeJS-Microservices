@@ -7,16 +7,19 @@ router.get('/api/timestamp/:date_string?', (req, res) => {
     if(date_string){
         valid_date = isNaN(date_string)?new Date(date_string+' GMT'):new Date(parseInt(date_string))
     }
-    console.log(valid_date)
-    
     const utc = valid_date.toUTCString()
     const unix = valid_date.getTime()
-
-    res.send({
-        unix: unix,
-        utc: utc
-    })
-
+    if(!isNaN(unix))
+    {    
+        res.send({
+            unix: unix,
+            utc: utc
+        })  
+    } else {
+        res.send({
+            error: 'Invalid Date'
+        })
+    }
 })
 
 module.exports = router
