@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000
 const timestampRouter = require('./routers/timestamp')
 const headerparserRouter = require('./routers/headerparser')
 const urlshortenerRouter = require('./routers/urlshortener')
+const exercisetrackerRouter = require('./routers/exercisetracker')
 var bodyParser = require('body-parser')
 
 
@@ -16,6 +17,7 @@ app.use(express.static('public'))
 app.use(timestampRouter)
 app.use(headerparserRouter)
 app.use(urlshortenerRouter)
+app.use(exercisetrackerRouter)
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + '/views/index.html');

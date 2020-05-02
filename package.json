@@ -23,6 +23,7 @@
     "mongoose": "^5.9.11",
     "public-ip": "^4.0.1",
     "request": "^2.88.2",
+    "shortid": "^2.2.15",
     "validator": "^13.0.0"
   }
 }
