@@ -78,6 +78,10 @@ taskSchema.methods.toJSON = function () {
 
 const Task = mongoose.model('Task', taskSchema)
 
+router.get('/api/exercise/users', async (req,res) => {
+    users = await User.find({})
+    res.send(users)
+})
 router.post('/api/exercise/new-user', async (req,res) => {
     const username = req.body.username
     const exists = await User.findOne({username: username})
@@ -103,7 +107,7 @@ router.post('/api/exercise/add', async (req,res) => {
         user: user, 
         description: taskform.description, 
         duration: taskform.duration, 
-        date: date.format(taskform.date || new Date(), date.compile('ddd MMM DD YYYY'))
+        date: date.format(new Date(taskform.date) || new Date(), date.compile('ddd MMM DD YYYY'))
     })
 
     try {
