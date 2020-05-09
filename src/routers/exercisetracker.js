@@ -59,7 +59,7 @@ const taskSchema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: Date
+        type: Date,
     }
 })
 
@@ -103,11 +103,12 @@ router.post('/api/exercise/new-user', async (req,res) => {
 router.post('/api/exercise/add', async (req,res) => {
     const taskform = req.body
     const user = await User.findOne({userId: taskform.userId})
+    const taskdate = taskform.date?new Date(taskform.date):new Date()
     const task = new Task({
         user: user, 
         description: taskform.description, 
         duration: taskform.duration, 
-        date: date.format(new Date(taskform.date) || new Date(), date.compile('ddd MMM DD YYYY'))
+        date: taskdate
     })
 
     try {
